@@ -19,7 +19,42 @@
     </div>
     <div class="row">
         <h1 class="h3 font-weight-normal">Ihre Termine</h1>
-        <br>
+    </div>
+    <br>
+    <div class="row">
+        <form class="col-sm-12 my-2" method="get" action="{{ path('appointment_list') }}">
+            <div class="form-row align-items-center">
+                <div class="col-sm-4">
+                    <label class="sr-only" for="customer">PatientIn</label>
+                    <select class="custom-select my-1 mr-sm-2" id="customer" name="customer">
+                        <option value=""></option>
+                        {% for customer in customers %}
+                            <option {{ app.request.query.get("customer") == customer.name ? "selected" : "" }}>{{ customer.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <label class="sr-only" for="fromDate">Datum von</label>
+                    <input type="date" class="form-control" id="fromDate" name="fromDate" placeholder="Datum von" value="{{ app.request.query.get('fromDate') }}">
+                </div>
+                <div class="col-sm-2">
+                    <label class="sr-only" for="toDate">Datum von</label>
+                    <input type="date" class="form-control" id="toDate" name="toDate" placeholder="Datum bis" value="{{ app.request.query.get('toDate') }}">
+                </div>
+                <div class="col-sm-2">
+                    <select class="custom-select my-1 mr-sm-2" id="status" name="status">
+                        <option value="0" {{ app.request.query.get("status") == "0" ? "selected" : "" }}>Alle</option>
+                        <option value="1" {{ app.request.query.get("status") == "1" ? "selected" : "" }}>Anstehend</option>
+                        <option value="2" {{ app.request.query.get("status") == "2" ? "selected" : "" }}>Beendet</option>
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Filter anwenden</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
         <table class="table">
             <thead>
             <tr>
@@ -42,11 +77,14 @@
                     <td>{{ appointment.endTime | date('H:i') }}</td>
                     <td>{{ appointment.complete ? 'Ja' : 'Nein' }}</td>
                     <td>
-                        <form style="float: left" action="{{ path('appointment_update', {'id': appointment.id}) }}" method="post">
+                        <form style="float: left" action="{{ path('appointment_update', {'id': appointment.id}) }}"
+                              method="post">
                             <input type="hidden" name="_method" value="PUT"/>
-                            <button type="submit" class="btn btn-primary">{{ appointment.complete ? 'Zurücksetzen' : 'Beenden' }}</button>
+                            <button type="submit"
+                                    class="btn btn-{{ appointment.complete ? 'warning' : 'success' }}">{{ appointment.complete ? 'Zurücksetzen' : 'Beenden' }}</button>
                         </form>
-                        <form style="float: right" action="{{ path('appointment_delete', {'id': appointment.id}) }}" method="post">
+                        <form style="float: left; margin-left: 2px" action="{{ path('appointment_delete', {'id': appointment.id}) }}"
+                              method="post">
                             <input type="hidden" name="_method" value="DELETE"/>
                             <button type="submit" class="btn btn-secondary btn-danger">Löschen</button>
                         </form>

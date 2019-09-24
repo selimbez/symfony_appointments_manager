@@ -121,8 +121,12 @@ class AppointmentController extends AbstractController
      */
     public function index(Request $request)
     {
+        $assignee = $this->tokenStorage->getToken()->getUser();
+        $appointments = $this->appointmentRepository->findByFilter($assignee, $request->get('customer'), $request->get('fromDate'), $request->get('toDate'), $request->get('status'));
+        $customers = $this->appointmentRepository->findCustomers($assignee);
         return $this->render('appointment/index.html.twig', [
-            'appointments' => $this->appointmentRepository->findBy(["assignee" => $this->tokenStorage->getToken()->getUser()])
+            'customers' => $customers,
+            'appointments' => $appointments
         ]);
     }
 }

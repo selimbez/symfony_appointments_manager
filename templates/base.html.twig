@@ -18,10 +18,7 @@
             {% if app.user %}
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item">
-                        <span class="nav-link clearfix d-none d-sm-inline-block">{{ app.user.username }}</span>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_logout') }}"><span class="clearfix d-none d-sm-inline-block">Ausloggen</span></a>
+                        <a class="nav-link" href="{{ path('app_logout') }}"><span class="clearfix d-none d-sm-inline-block">{{ app.user.fullName }} - Ausloggen</span></a>
                     </li>
                 </ul>
             {% endif %}
