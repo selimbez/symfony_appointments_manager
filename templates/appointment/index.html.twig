@@ -7,9 +7,11 @@
         <div class="col-md-12 col-lg-12 col-xl-12">
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
-                    <div class="alert alert-{{ label }}" role="alert">
-                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <div class="alert alert-dismissible alert-{{ label }} fade show" role="alert">
                         {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 {% endfor %}
             {% endfor %}
@@ -27,26 +29,30 @@
                 <th scope="col">Startzeit</th>
                 <th scope="col">Endzeit</th>
                 <th scope="col">Beendet</th>
-                <th scope="col">Optionen</th>
+                <th scope="col" style="width: 250px">Optionen</th>
             </tr>
             </thead>
             <tbody>
-                {% for appointment in appointments %}
-                    <tr>
-                        <td>{{ appointment.title }}</td>
-                        <td>{{ appointment.customer }}</td>
-                        <td>{{ appointment.date | date('d.m.Y')}}</td>
-                        <td>{{ appointment.startTime | date('H:i') }}</td>
-                        <td>{{ appointment.endTime | date('H:i')}}</td>
-                        <td>{{ appointment.complete ? 'Ja' : 'Nein' }}</td>
-                        <td>
-                            <div class="btn-group" role="group" aria-label="Optionen">
-                                <button type="button" class="btn btn-secondary btn-success">Beenden</button>
-                                <button type="button" class="btn btn-secondary btn-danger">Löschen</button>
-                            </div>
-                        </td>
-                    </tr>
-                {% endfor %}
+            {% for appointment in appointments %}
+                <tr>
+                    <td>{{ appointment.title }}</td>
+                    <td>{{ appointment.customer }}</td>
+                    <td>{{ appointment.date | date('d.m.Y') }}</td>
+                    <td>{{ appointment.startTime | date('H:i') }}</td>
+                    <td>{{ appointment.endTime | date('H:i') }}</td>
+                    <td>{{ appointment.complete ? 'Ja' : 'Nein' }}</td>
+                    <td>
+                        <form style="float: left" action="{{ path('appointment_update', {'id': appointment.id}) }}" method="post">
+                            <input type="hidden" name="_method" value="PUT"/>
+                            <button type="submit" class="btn btn-primary">{{ appointment.complete ? 'Zurücksetzen' : 'Beenden' }}</button>
+                        </form>
+                        <form style="float: right" action="{{ path('appointment_delete', {'id': appointment.id}) }}" method="post">
+                            <input type="hidden" name="_method" value="DELETE"/>
+                            <button type="submit" class="btn btn-secondary btn-danger">Löschen</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>

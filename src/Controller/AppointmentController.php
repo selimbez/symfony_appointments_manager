@@ -81,6 +81,42 @@ class AppointmentController extends AbstractController
     }
 
     /**
+     * @Route("/appointment/toggleStatus", name="appointment_update")
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function toggleStatusAction(Request $request)
+    {
+        $appointment = $this->appointmentRepository->find($request->get('id'));
+        if ($appointment != null) {
+            $curStatus = $appointment->getComplete();
+            $appointment->setComplete(!$curStatus);
+            $this->entityManager->persist($appointment);
+            $this->entityManager->flush();
+
+            $this->addFlash('success', 'Der Termin wurde erfolgreich ' . ($curStatus ? 'zurückgesetzt' : 'beendet') . '.');
+        }
+        return $this->redirect($request->headers->get('referer'));
+    }
+
+    /**
+     * @Route("/appointment/delete", name="appointment_delete")
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function deleteAction(Request $request)
+    {
+        $appointment = $this->appointmentRepository->find($request->get('id'));
+        if ($appointment != null) {
+            $this->entityManager->remove($appointment);
+            $this->entityManager->flush();
+
+            $this->addFlash('success', 'Der Termin wurde erfolgreich gelöscht.');
+        }
+        return $this->redirect($request->headers->get('referer'));
+    }
+
+    /**
      * @Route("/appointment", name="appointment_list")
      * @param Request $request
      * @return RedirectResponse|Response

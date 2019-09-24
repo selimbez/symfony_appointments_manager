@@ -6,6 +6,7 @@ use App\Entity\Appointment;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\ORMException;
 
 /**
  * @method Appointment|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,5 +19,14 @@ class AppointmentRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Appointment::class);
+    }
+
+    protected function delete(Appointment $entity) {
+        try {
+            $this->getEntityManager()->remove($entity);
+            return true;
+        } catch (ORMException $e) {
+            return false;
+        }
     }
 }
