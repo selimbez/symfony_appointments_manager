@@ -11,11 +11,15 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
+            pattern: ^/
+            anonymous: ~
             provider: users
             logout:
                 path: app_logout
                 target: app_login
+            form_login:
+                login_path: app_login
+                check_path: app_login
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
