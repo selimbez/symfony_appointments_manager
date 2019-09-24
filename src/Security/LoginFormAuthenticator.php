@@ -77,7 +77,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate($token->getUser()->getSecretary() ? 'appointment_create' : 'appointment_list'));
+        return new RedirectResponse($this->urlGenerator->generate(in_array(User::SECRETARY, $token->getRoleNames()) ? 'appointment_create' : 'appointment_list'));
     }
 
     protected function getLoginUrl()

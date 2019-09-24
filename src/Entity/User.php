@@ -13,6 +13,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
+    const DOCTOR = "ROLE_DOCTOR";
+    const SECRETARY = "ROLE_SECRETARY";
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -155,7 +158,7 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        return $this->secretary ? ["ROLE_SECRETARY"] : ["ROLE_DOCTOR"];
+        return $this->secretary ? [self::SECRETARY] : [self::DOCTOR];
     }
 
     /**

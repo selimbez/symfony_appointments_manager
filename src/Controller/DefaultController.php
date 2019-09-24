@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,7 +18,7 @@ class DefaultController extends AbstractController
     public function index(TokenStorageInterface $tokenStorage)
     {
         if ($tokenStorage->getToken()->isAuthenticated()) {
-            return $this->redirectToRoute(in_array("ROLE_SECRETARY", $tokenStorage->getToken()->getRoleNames()) ? 'appointment_create' : 'appointment_list');
+            return $this->redirectToRoute(in_array(User::SECRETARY, $tokenStorage->getToken()->getRoleNames()) ? 'appointment_create' : 'appointment_list');
         } else {
             return $this->redirectToRoute('app_login');
         }
