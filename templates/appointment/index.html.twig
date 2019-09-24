@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}MeinPraxis - Neuer Termin{% endblock %}
+{% block title %}MeinPraxis - Termine{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -27,6 +27,7 @@
                 <th scope="col">Startzeit</th>
                 <th scope="col">Endzeit</th>
                 <th scope="col">Beendet</th>
+                <th scope="col">Optionen</th>
             </tr>
             </thead>
             <tbody>
@@ -34,10 +35,16 @@
                     <tr>
                         <td>{{ appointment.title }}</td>
                         <td>{{ appointment.customer }}</td>
-                        <td>kommt noch</td>
+                        <td><i>kommt noch</i></td>
                         <td>{{ appointment.startDatetime | date('Y-m-d') }}</td>
                         <td>{{ appointment.endDatetime | date('Y-m-d')}}</td>
                         <td>{{ appointment.complete ? 'Ja' : 'Nein' }}</td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Optionen">
+                                <button type="button" class="btn btn-secondary btn-success">Beenden</button>
+                                <button type="button" class="btn btn-secondary btn-danger">Löschen</button>
+                            </div>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

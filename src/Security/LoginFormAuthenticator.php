@@ -68,7 +68,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return $credentials['password'] == $user->getPassword();
+        return $credentials['password'] == $user->getPassword(); // no hashing for simplicity
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)

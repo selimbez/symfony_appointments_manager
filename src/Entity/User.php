@@ -155,7 +155,7 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        return $this->secretary ? ["SECRETARY"] : ["DOCTOR"];
+        return $this->secretary ? ["ROLE_SECRETARY"] : ["ROLE_DOCTOR"];
     }
 
     /**

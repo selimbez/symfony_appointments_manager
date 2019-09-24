@@ -22,5 +22,5 @@ security:
 
     access_control:
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        #- { path: ^/appointment/create, roles: SECRETARY }
-        #- { path: ^/appointment, roles: DOCTOR }
+        - { path: ^/appointment/create, roles: ROLE_SECRETARY }
+        - { path: ^/appointment, roles: ROLE_DOCTOR }
