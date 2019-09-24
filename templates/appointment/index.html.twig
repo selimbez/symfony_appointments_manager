@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MeinPraxis - Neuer Termin{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xl-12">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }}" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row">
+        <h1 class="h3 font-weight-normal">Ihre Termine</h1>
+    </div>
+{% endblock %}

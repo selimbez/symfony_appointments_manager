@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}MeinPraxis{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="css/style.css"></script>
+</head>
+<body>
+<div class="container">
+    <header>
+        <nav class="row navbar navbar-expand-lg navbar-light bg-light">
+            <a class="col-sm-2 navbar-brand" href="#">MeinPraxis</a>
+            {% if app.user %}
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <span class="nav-link clearfix d-none d-sm-inline-block">{{ app.user.username }}</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_logout') }}"><span class="clearfix d-none d-sm-inline-block">Ausloggen</span></a>
+                    </li>
+                </ul>
+            {% endif %}
+        </nav>
+    </header>
+    <br><br>
+    {% block body %}{% endblock %}
+</div>
+{% block javascripts %}{% endblock %}
+</body>
+</html>
