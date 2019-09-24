@@ -32,18 +32,25 @@ class Appointment
 
     /**
      * @var DateTimeInterface
-     * @Assert\DateTime()
-     * @ORM\Column(type="datetime")
+     * @Assert\Date()
+     * @ORM\Column(type="date")
      */
-    private $startDatetime;
+    private $date;
 
     /**
      * @var DateTimeInterface
-     * @Assert\DateTime()
-     * @Assert\GreaterThan(propertyPath="startDatetime")
-     * @ORM\Column(type="datetime")
+     * @Assert\Time()
+     * @ORM\Column(type="time")
      */
-    private $endDatetime;
+    private $startTime;
+
+    /**
+     * @var DateTimeInterface
+     * @Assert\Time()
+     * @Assert\GreaterThan(propertyPath="startTime")
+     * @ORM\Column(type="time")
+     */
+    private $endTime;
 
     /**
      * @var User
@@ -86,26 +93,38 @@ class Appointment
         return $this;
     }
 
-    public function getStartDatetime(): ?DateTimeInterface
+    public function getDate(): ?DateTimeInterface
     {
-        return $this->startDatetime;
+        return $this->date;
     }
 
-    public function setStartDatetime(DateTimeInterface $startDatetime): self
+    public function setDate(DateTimeInterface $date): self
     {
-        $this->startDatetime = $startDatetime;
+        $this->date = $date;
 
         return $this;
     }
 
-    public function getEndDatetime(): ?DateTimeInterface
+    public function getEndTime(): ?DateTimeInterface
     {
-        return $this->endDatetime;
+        return $this->endTime;
     }
 
-    public function setEndDatetime(DateTimeInterface $endDatetime): self
+    public function setEndTime(DateTimeInterface $endTime): self
     {
-        $this->endDatetime = $endDatetime;
+        $this->endTime = $endTime;
+
+        return $this;
+    }
+
+    public function getStartTime(): ?DateTimeInterface
+    {
+        return $this->startTime;
+    }
+
+    public function setStartTime(DateTimeInterface $startTime): self
+    {
+        $this->startTime = $startTime;
 
         return $this;
     }

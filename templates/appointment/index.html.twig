@@ -35,9 +35,9 @@
                     <tr>
                         <td>{{ appointment.title }}</td>
                         <td>{{ appointment.customer }}</td>
-                        <td><i>kommt noch</i></td>
-                        <td>{{ appointment.startDatetime | date('Y-m-d') }}</td>
-                        <td>{{ appointment.endDatetime | date('Y-m-d')}}</td>
+                        <td>{{ appointment.date | date('d.m.Y')}}</td>
+                        <td>{{ appointment.startTime | date('H:i') }}</td>
+                        <td>{{ appointment.endTime | date('H:i')}}</td>
                         <td>{{ appointment.complete ? 'Ja' : 'Nein' }}</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Optionen">

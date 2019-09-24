@@ -9,13 +9,17 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Time;
 
 class AppointmentFormType extends AbstractType
 {
@@ -40,22 +44,33 @@ class AppointmentFormType extends AbstractType
                 'attr' => ['class' => 'form-control']
             ]
         )->add(
-            'startDatetime',
-            DateTimeType::class,
+            'date',
+            DateType::class,
             [
-                'label' => 'Start',
-                'constraints' => [new DateTime()],
+                'label' => 'Datum',
+                'constraints' => [new Date()],
                 'attr' => ['class' => 'form-control'],
                 'widget' => 'single_text'
             ]
         )->add(
-            'endDatetime',
-            DateTimeType::class,
+            'startTime',
+            TimeType::class,
             [
-                'label' => 'Ende',
-                'constraints' => [new DateTime()],
+                'label' => 'Startzeit',
+                'constraints' => [new Time()],
                 'attr' => ['class' => 'form-control'],
-                'widget' => 'single_text'
+                'widget' => 'choice',
+                'with_seconds' => false
+            ]
+        )->add(
+            'endTime',
+            TimeType::class,
+            [
+                'label' => 'Endzeit',
+                'constraints' => [new Time()],
+                'attr' => ['class' => 'form-control'],
+                'widget' => 'choice',
+                'with_seconds' => false
             ]
         )->add(
             'assignee',
