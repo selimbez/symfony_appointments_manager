@@ -17,5 +17,30 @@
     </div>
     <div class="row">
         <h1 class="h3 font-weight-normal">Ihre Termine</h1>
+        <br>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Titel</th>
+                <th scope="col">PatientIn</th>
+                <th scope="col">Datum</th>
+                <th scope="col">Startzeit</th>
+                <th scope="col">Endzeit</th>
+                <th scope="col">Beendet</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for appointment in appointments %}
+                    <tr>
+                        <td>{{ appointment.title }}</td>
+                        <td>{{ appointment.customer }}</td>
+                        <td>kommt noch</td>
+                        <td>{{ appointment.startDatetime | date('Y-m-d') }}</td>
+                        <td>{{ appointment.endDatetime | date('Y-m-d')}}</td>
+                        <td>{{ appointment.complete ? 'Ja' : 'Nein' }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}
