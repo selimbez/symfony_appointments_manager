@@ -52,6 +52,9 @@ class AppointmentRepository extends ServiceEntityRepository
             $queryBuilder = $queryBuilder->andWhere("a.complete = :complete")->setParameter("complete", $status == "2");
         }
 
-        return $queryBuilder->getQuery()->getResult();
+        return $queryBuilder->orderBy("a.date", "ASC")
+            ->addOrderBy("a.startTime", "ASC")
+            ->getQuery()
+            ->getResult();
     }
 }
