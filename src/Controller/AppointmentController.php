@@ -4,8 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Appointment;
 use App\Form\AppointmentFormType;
-use App\Repository\AppointmentRepository;
-use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
