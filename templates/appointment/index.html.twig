@@ -61,7 +61,7 @@
                         <input class="form-check-input" type="radio" name="status" id="gridRadios2"
                                value="completed" {{ app.request.query.get("status") == "completed" ? "checked" : "" }}>
                         <label class="form-check-label" for="gridRadios2">
-                            Beendet
+                            Status
                         </label>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                     <td>{{ appointment.date | date('d.m.Y') }}</td>
                     <td>{{ appointment.startTime | date('H:i') }}</td>
                     <td>{{ appointment.endTime | date('H:i') }}</td>
-                    <td>{{ appointment.complete ? 'Ja' : 'Nein' }}</td>
+                    <td>{{ appointment.complete ? 'Beendet' : 'Anstehend' }}</td>
                     <td>
                         <form style="float: left" action="{{ path('appointment_update', {'id': appointment.id}) }}"
                               method="post">
