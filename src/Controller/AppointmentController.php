@@ -53,7 +53,7 @@ class AppointmentController extends AbstractController
     }
 
     /**
-     * @Route("/appointment/create", name="appointment_create")
+     * @Route("/appointment/create", name="appointment_create", methods={"GET","POST"})
      * @param Request $request
      * @return RedirectResponse|Response
      */
@@ -79,7 +79,7 @@ class AppointmentController extends AbstractController
     }
 
     /**
-     * @Route("/appointment/toggleStatus", name="appointment_update")
+     * @Route("/appointment/toggleStatus", name="appointment_update", methods={"PUT"})
      * @param Request $request
      * @return RedirectResponse
      */
@@ -98,7 +98,7 @@ class AppointmentController extends AbstractController
     }
 
     /**
-     * @Route("/appointment/delete", name="appointment_delete")
+     * @Route("/appointment/delete", name="appointment_delete", methods={"DELETE"})
      * @param Request $request
      * @return RedirectResponse
      */
@@ -115,7 +115,7 @@ class AppointmentController extends AbstractController
     }
 
     /**
-     * @Route("/appointment", name="appointment_list")
+     * @Route("/appointment", name="appointment_list", methods={"GET"})
      * @param Request $request
      * @return RedirectResponse|Response
      */

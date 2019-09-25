@@ -48,8 +48,8 @@ class AppointmentRepository extends ServiceEntityRepository
         if (!empty($toDate)) {
             $queryBuilder = $queryBuilder->andWhere("a.date <= :toDate")->setParameter("toDate", $toDate);
         }
-        if (!empty($status) && in_array($status, ["1", "2"])) {
-            $queryBuilder = $queryBuilder->andWhere("a.complete = :complete")->setParameter("complete", $status == "2");
+        if (in_array($status, ["pending", "completed"])) {
+            $queryBuilder = $queryBuilder->andWhere("a.complete = :complete")->setParameter("complete", $status == "completed");
         }
 
         return $queryBuilder->orderBy("a.date", "ASC")
