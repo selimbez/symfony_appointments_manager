@@ -54,6 +54,7 @@ class AppointmentRepository extends ServiceEntityRepository
 
         return $queryBuilder->orderBy("a.date", "ASC")
             ->addOrderBy("a.startTime", "ASC")
+            ->addOrderBy("a.endTime", "ASC")
             ->getQuery()
             ->getResult();
     }
